@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>CroSwap — DEX Aggregator on Cronos</title>
+<title>NeonFi — DEX Aggregator on Cronos</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root{--bg:#080b10;--s:rgba(255,255,255,0.04);--b:rgba(255,255,255,0.08);--n:#00f5c4;--n2:#7b5cf0;--w:#f5a623;--r:#ff4d6d;--t:#e8eaf0;--m:#6b7280;--c:rgba(12,16,24,0.93);--ra:16px;--rs:10px}
@@ -282,7 +282,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
   main{padding:16px 11px 84px;gap:13px}
   nav{padding:9px 11px}
   .logo{font-size:1rem}
-  .logo-icon{width:24px;height:24px;font-size:11px}
+  .logo-icon{width:24px;height:24px;font-size:11px;overflow:hidden}
   .cb{padding:7px 10px;font-size:0.73rem}
   .live-badge{display:none}
   .toast{bottom:70px}
@@ -299,7 +299,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
 <!-- NAV -->
 <nav>
   <div class="logo" onclick="go('swap')">
-    <div class="logo-icon">⚡</div>Cro<em>Swap</em>
+    <div class="logo-icon" style="background:none;padding:0;overflow:hidden"><img src="neonfi-logo.png" alt="NeonFi" style="width:28px;height:28px;object-fit:contain;border-radius:6px" onerror="this.parentElement.innerHTML='⚡'"/></div>Neon<em>Fi</em>
     <span class="live-badge"><span class="live-dot"></span>LIVE</span>
   </div>
   <div class="nav-links">
@@ -349,6 +349,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
           <div class="rrow"><span class="rk">Rate</span><span class="rv" id="dr">—</span></div>
           <div class="rrow"><span class="rk">Min. Received</span><span class="rv" id="dmin">—</span></div>
           <div class="rrow"><span class="rk">Slippage</span><span class="rv" id="dslip">—</span></div>
+          <div class="rrow"><span class="rk">Protocol Fee</span><span class="rv" id="dFee" style="color:var(--w)">—</span></div>
           <div class="rrow"><span class="rk">Gas Est.</span><span class="rv">~150k (~0.05 CRO)</span></div>
           <div class="rrow"><span class="rk">Path</span><span class="rv g" id="dpath">—</span></div>
           <div class="rrow"><span class="rk">Router</span><span class="rv" id="drouter" style="font-size:.62rem">—</span></div>
@@ -375,7 +376,7 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
 <!-- ══ ANALYTICS ══ -->
 <div class="page" id="page-analytics">
   <div class="ag">
-    <div class="mc"><div class="ml">Total Swaps</div><div class="mv" id="an-swaps">0</div><div class="mc2 up" id="an-swaps2">on CroSwap</div></div>
+    <div class="mc"><div class="ml">Total Swaps</div><div class="mv" id="an-swaps">0</div><div class="mc2 up" id="an-swaps2">on NeonFi</div></div>
     <div class="mc"><div class="ml">Total Volume</div><div class="mv" id="an-vol">0 CRO</div><div class="mc2 up" id="an-vol2">all-time</div></div>
     <div class="mc"><div class="ml">Unique Traders</div><div class="mv" id="an-traders">0</div><div class="mc2 up" id="an-traders2">wallets</div></div>
     <div class="mc"><div class="ml">Avg Swap Size</div><div class="mv" id="an-avg">0 CRO</div><div class="mc2" id="an-avg2">per trade</div></div>
@@ -392,10 +393,10 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
   <div class="ai-card w-full">
     <div class="aih">
       <div class="aii">🤖</div>
-      <div><div class="ait">AI Trade Analysis</div><div class="ais">Based on YOUR swap history on CroSwap</div></div>
+      <div><div class="ait">AI Trade Analysis</div><div class="ais">Based on YOUR swap history on NeonFi</div></div>
       <button class="rfbtn" onclick="loadAnalyticsAI()" id="aiBtn">Analyse</button>
     </div>
-    <div class="aib ld" id="aiBody">Click "Analyse" to generate AI insights from your CroSwap trading activity…</div>
+    <div class="aib ld" id="aiBody">Click "Analyse" to generate AI insights from your NeonFi trading activity…</div>
   </div>
 </div>
 
@@ -469,12 +470,12 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px 1
     <button class="lbt" onclick="setLbTab('recent',this)">Most Recent</button>
   </div>
   <div id="lbList" style="width:100%">
-    <div class="empty-lb"><div>🏆</div>No swaps yet on CroSwap.<br/>Make the first swap to appear here!</div>
+    <div class="empty-lb"><div>🏆</div>No swaps yet on NeonFi.<br/>Make the first swap to appear here!</div>
   </div>
   <div class="ai-card w-full">
     <div class="aih">
       <div class="aii">🏆</div>
-      <div><div class="ait">Leaderboard Commentary</div><div class="ais">AI analysis of CroSwap traders</div></div>
+      <div><div class="ait">Leaderboard Commentary</div><div class="ais">AI analysis of NeonFi traders</div></div>
       <button class="rfbtn" onclick="loadLbAI()" id="lbAIBtn">Analyse</button>
     </div>
     <div class="aib ld" id="lbAIBody">Click "Analyse" for AI commentary on leaderboard activity…</div>
@@ -525,6 +526,16 @@ const LOTTERY_MAX_TICKETS  = 100;
 const LOTTERY_PRIZE_PCT    = 0.98; // 98% to winner
 // Placeholder lottery contract (replace with real deployed contract)
 const LOTTERY_CONTRACT = '0x0000000000000000000000000000000000000001';
+
+// ── PROTOCOL FEE CONFIG ──────────────────────────────────────────
+// Replace FEE_RECIPIENT with YOUR wallet address to receive fees
+const FEE_RECIPIENT  = '0x2b306848f70378ef2B9bf8B86C7D964f32001B93';
+const FEE_BPS        = 10;   // 10 basis points = 0.1%  (1 bp = 0.01%)
+//   Examples: 5 = 0.05%  |  10 = 0.1%  |  25 = 0.25%  |  50 = 0.5%
+// Fee only applies to CRO-input swaps (CRO→Token).
+// For Token→Token swaps the fee is skipped (no on-chain CRO to intercept cleanly).
+const FEE_ENABLED    = FEE_RECIPIENT !== '0x0000000000000000000000000000000000000000';
+// ────────────────────────────────────────────────────────────────
 
 const TOKENS = [
   {sym:'CRO',  name:'Cronos',         icon:'C',bg:'#1a3f5c',fg:'#4fa3e0',addr:'NATIVE',                                       dec:18,bal:0n,cg:'crypto-com-chain'},
@@ -684,6 +695,13 @@ async function runQuotes(){
   document.getElementById('dr').textContent=`1 ${fromTok.sym} = ${rate.toFixed(8)} ${toTok.sym}`;
   document.getElementById('dmin').textContent=(+frW(bestQ.amtOutMin,toTok.dec)).toFixed(6)+' '+toTok.sym;
   document.getElementById('dslip').textContent=slip+'%';
+  // Protocol fee display
+  if(FEE_ENABLED && fromTok.addr==='NATIVE'){
+    const feeAmt=(parseFloat(amtStr)*FEE_BPS/10000).toFixed(6);
+    document.getElementById('dFee').textContent=`${feeAmt} CRO (${FEE_BPS/100}%)`;
+  } else {
+    document.getElementById('dFee').textContent=FEE_ENABLED?'Token swaps: no fee':'Disabled';
+  }
   document.getElementById('dpath').textContent=bestQ.path.length===2?`${fromTok.sym}→${toTok.sym}`:`${fromTok.sym}→WCRO→${toTok.sym}`;
   document.getElementById('drouter').textContent=bestQ.dex.router;
   document.getElementById('ri').classList.remove('hidden');
@@ -719,40 +737,101 @@ async function approveToken(){
 
 async function execSwap(){
   if(!bestQ)return;
-  const amtStr=document.getElementById('fromAmt').value;
-  const ai=toW(amtStr,fromTok.dec);
-  const fN=fromTok.addr==='NATIVE',tN=toTok.addr==='NATIVE';
-  let fn,txObj;
-  if(fN){fn='swapExactETHForTokens';txObj={from:W.addr,to:bestQ.dex.router,value:'0x'+ai.toString(16),data:bldSwap(fn,ai,bestQ.amtOutMin,bestQ.path,W.addr,dl)};}
-  else if(tN){fn='swapExactTokensForETH';txObj={from:W.addr,to:bestQ.dex.router,data:bldSwap(fn,ai,bestQ.amtOutMin,bestQ.path,W.addr,dl)};}
-  else{fn='swapExactTokensForTokens';txObj={from:W.addr,to:bestQ.dex.router,data:bldSwap(fn,ai,bestQ.amtOutMin,bestQ.path,W.addr,dl)};}
+  const amtStr = document.getElementById('fromAmt').value;
+  const amtNum = parseFloat(amtStr);
+  const fN = fromTok.addr==='NATIVE';
+  const tN = toTok.addr==='NATIVE';
+
+  // ── Fee calculation ──────────────────────────────────────────
+  // Fee is only charged on CRO-input swaps (fN=true).
+  // For token-input swaps we skip it — deducting ERC20 on-chain
+  // without a contract requires an extra transferFrom step which
+  // would need a pre-deployed contract. CRO fee is a simple value transfer.
+  const chargeFee = FEE_ENABLED && fN;
+  const feeCRO    = chargeFee ? amtNum * FEE_BPS / 10000 : 0;
+  const swapCRO   = chargeFee ? amtNum - feeCRO : amtNum;
+
+  const ai        = toW(swapCRO.toFixed(fromTok.dec), fromTok.dec); // amount after fee
+  const feeWei    = toW(feeCRO.toFixed(18), 18);
+
+  // Rebuild amtOutMin against the post-fee swap amount
+  // (bestQ.amtOutMin was calculated on full amtIn — recalc proportionally)
+  const slipBasis = BigInt(Math.round(slip*10));
+  // Re-fetch quote on net amount for accuracy; fallback to scaling
+  const scaledOutMin = bestQ.amtOut * ai / toW(amtStr, fromTok.dec) * (1000n - slipBasis) / 1000n;
+
+  let fn, txObj;
+  if(fN){
+    fn='swapExactETHForTokens';
+    txObj={from:W.addr,to:bestQ.dex.router,value:'0x'+ai.toString(16),data:bldSwap(fn,ai,scaledOutMin,bestQ.path,W.addr,dl)};
+  } else if(tN){
+    fn='swapExactTokensForETH';
+    txObj={from:W.addr,to:bestQ.dex.router,data:bldSwap(fn,ai,scaledOutMin,bestQ.path,W.addr,dl)};
+  } else {
+    fn='swapExactTokensForTokens';
+    txObj={from:W.addr,to:bestQ.dex.router,data:bldSwap(fn,ai,scaledOutMin,bestQ.path,W.addr,dl)};
+  }
+
   try{
     document.getElementById('swapBtn').disabled=true;
-    document.getElementById('swapTxt').innerHTML='<span class="sp2"></span>Confirm…';
-    toast('🔄','Pending','Confirm in wallet…','','pending');
-    const hash=await window.ethereum.request({method:'eth_sendTransaction',params:[txObj]});
+
+    // ── Step 1: Send fee (CRO swaps only) ─────────────────────
+    if(chargeFee && feeCRO > 0){
+      document.getElementById('swapTxt').innerHTML='<span class="sp2"></span>Step 1/2: Pay fee…';
+      toast('💰','Protocol Fee',`Sending ${feeCRO.toFixed(6)} CRO fee (${FEE_BPS/100}%)…`,'','pending');
+      const feeTx = await window.ethereum.request({
+        method:'eth_sendTransaction',
+        params:[{from:W.addr, to:FEE_RECIPIENT, value:'0x'+feeWei.toString(16), data:'0x'}]
+      });
+      // Wait for fee tx to confirm before swap
+      document.getElementById('swapTxt').innerHTML='<span class="sp2"></span>Confirming fee…';
+      const feeRec = await pollRec(feeTx);
+      if(!feeRec || feeRec.status!=='0x1'){
+        toast('❌','Fee Failed','Fee transaction did not confirm','https://cronoscan.com/tx/'+feeTx,'error');
+        return;
+      }
+      // Track fee collected
+      dexStats.feesCollectedCRO = (dexStats.feesCollectedCRO||0) + feeCRO;
+    }
+
+    // ── Step 2: Execute the swap ───────────────────────────────
+    document.getElementById('swapTxt').innerHTML=chargeFee?'<span class="sp2"></span>Step 2/2: Confirm swap…':'<span class="sp2"></span>Confirm swap…';
+    toast('🔄','Swap Pending','Confirm the swap in your wallet…','','pending');
+    const hash = await window.ethereum.request({method:'eth_sendTransaction',params:[txObj]});
     document.getElementById('swapTxt').innerHTML='<span class="sp2"></span>Mining…';
-    toast('⏳','Mining…','Waiting for block…','https://cronoscan.com/tx/'+hash,'pending');
-    const outAmt=parseFloat(frW(bestQ.amtOut,toTok.dec));
-    addTx(fromTok.sym,toTok.sym,parseFloat(amtStr),outAmt,hash,'pending');
-    const rec=await pollRec(hash);
-    const ok=rec?.status==='0x1';
-    updTx(hash,ok?'success':'failed');
+    toast('⏳','Mining…','Waiting for block confirmation…','https://cronoscan.com/tx/'+hash,'pending');
+
+    const outAmt = parseFloat(frW(bestQ.amtOut,toTok.dec));
+    addTx(fromTok.sym,toTok.sym,amtNum,outAmt,hash,'pending');
+    const rec = await pollRec(hash);
+    const ok  = rec?.status==='0x1';
+    updTx(hash, ok?'success':'failed');
+
     if(ok){
-      // ── Record swap in DEX stats ──
-      const amtInNum = parseFloat(amtStr);
-      // Estimate CRO value (if from is CRO, use directly; else approximation)
-      const amtInCRO = fromTok.sym==='CRO' ? amtInNum : (toTok.sym==='CRO' ? outAmt : amtInNum);
-      const pair = `${fromTok.sym}/${toTok.sym}`;
-      dexStats.swaps.push({from:fromTok.sym,to:toTok.sym,amtIn:amtInNum,amtOut:outAmt,amtInCRO,pair,addr:W.addr,ts:Date.now(),hash,dex:bestQ.dex.name});
+      // Record in DEX stats
+      const amtInCRO = fN ? amtNum : (tN ? outAmt : amtNum);
+      dexStats.swaps.push({
+        from:fromTok.sym, to:toTok.sym,
+        amtIn:amtNum, amtOut:outAmt, amtInCRO,
+        fee:feeCRO, pair:`${fromTok.sym}/${toTok.sym}`,
+        addr:W.addr, ts:Date.now(), hash, dex:bestQ.dex.name
+      });
       dexStats.traders.add(W.addr);
-      // Update swap counter UI
       refreshSwapStats();
-      toast('✅','Swap Complete!',`${amtStr} ${fromTok.sym} → ${outAmt.toFixed(4)} ${toTok.sym}`,'https://cronoscan.com/tx/'+hash,'success');
-      document.getElementById('fromAmt').value='';clearQuoteUI();await loadBals();
-    }else toast('❌','Swap Failed','Reverted on-chain','https://cronoscan.com/tx/'+hash,'error');
-  }catch(e){toast('❌','Rejected',e.message?.slice(0,80)||'Cancelled','','error');}
-  finally{document.getElementById('swapBtn').disabled=false;rfSwapBtn();}
+      const feeNote = feeCRO>0 ? ` · Fee: ${feeCRO.toFixed(4)} CRO` : '';
+      toast('✅','Swap Complete!',`${amtStr} ${fromTok.sym} → ${outAmt.toFixed(4)} ${toTok.sym}${feeNote}`,'https://cronoscan.com/tx/'+hash,'success');
+      document.getElementById('fromAmt').value='';
+      clearQuoteUI();
+      await loadBals();
+    } else {
+      toast('❌','Swap Failed','Transaction reverted on-chain','https://cronoscan.com/tx/'+hash,'error');
+    }
+  } catch(e){
+    toast('❌','Rejected', e.message?.slice(0,80)||'Cancelled','','error');
+  } finally {
+    document.getElementById('swapBtn').disabled=false;
+    rfSwapBtn();
+  }
 }
 async function pollRec(h,max=120000){const t0=Date.now();while(Date.now()-t0<max){await new Promise(r=>setTimeout(r,2500));try{const r=await window.ethereum.request({method:'eth_getTransactionReceipt',params:[h]});if(r)return r;}catch(e){}}return null;}
 async function handleSwap(){if(!W.connected){toggleWallet();return;}if(needApproval){await approveToken();return;}await execSwap();}
@@ -801,7 +880,7 @@ function refreshAnalytics(){
   const avg   = total>0 ? vol/total : 0;
 
   document.getElementById('an-swaps').textContent   = total;
-  document.getElementById('an-swaps2').textContent  = total===1?'1 swap on CroSwap':total+' swaps on CroSwap';
+  document.getElementById('an-swaps2').textContent  = total===1?'1 swap on NeonFi':total+' swaps on NeonFi';
   document.getElementById('an-vol').textContent     = vol>=1000?(vol/1000).toFixed(2)+'K CRO':vol.toFixed(2)+' CRO';
   document.getElementById('an-vol2').textContent    = 'all-time volume';
   document.getElementById('an-traders').textContent = traders;
@@ -843,16 +922,16 @@ async function loadAnalyticsAI(){
   const btn=document.getElementById('aiBtn');
   const body=document.getElementById('aiBody');
   btn.disabled=true;btn.textContent='…';
-  body.className='aib ld';body.textContent='Analysing your CroSwap trade history…';
+  body.className='aib ld';body.textContent='Analysing your NeonFi trade history…';
   const swaps=dexStats.swaps;
-  if(swaps.length===0){body.className='aib';body.textContent='No swaps found yet on CroSwap. Make your first swap on the Swap page, then come back for AI analysis!';btn.disabled=false;btn.textContent='Analyse';return;}
+  if(swaps.length===0){body.className='aib';body.textContent='No swaps found yet on NeonFi. Make your first swap on the Swap page, then come back for AI analysis!';btn.disabled=false;btn.textContent='Analyse';return;}
   const total=swaps.length;
   const vol=swaps.reduce((s,x)=>s+x.amtInCRO,0).toFixed(2);
   const pairs=[...new Set(swaps.map(s=>s.pair))];
   const traders=dexStats.traders.size;
   const avgSize=(vol/total).toFixed(2);
   const lastSwap=swaps[swaps.length-1];
-  const context=`CroSwap DEX on Cronos — live session stats:
+  const context=`NeonFi DEX on Cronos — live session stats:
 - Total swaps executed: ${total}
 - Total volume: ${vol} CRO
 - Unique traders: ${traders}
@@ -861,7 +940,7 @@ async function loadAnalyticsAI(){
 - Most recent swap: ${lastSwap.amtIn} ${lastSwap.from} → ${lastSwap.amtOut.toFixed(4)} ${lastSwap.to}
 - DEX sources used: ${[...new Set(swaps.map(s=>s.dex))].join(', ')}`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`You are a DeFi analytics assistant for CroSwap, a DEX aggregator on Cronos chain. Analyse this trading session data and give 3-4 bullet insights:\n\n${context}\n\nCover: trading patterns, volume observations, pair popularity, and one actionable tip. Be concise, practical, crypto-native. Plain text only.`}]})});
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`You are a DeFi analytics assistant for NeonFi, a DEX aggregator on Cronos chain. Analyse this trading session data and give 3-4 bullet insights:\n\n${context}\n\nCover: trading patterns, volume observations, pair popularity, and one actionable tip. Be concise, practical, crypto-native. Plain text only.`}]})});
     const d=await res.json();
     const text=d.content?.[0]?.text||'Analysis unavailable.';
     body.className='aib';
@@ -1019,7 +1098,7 @@ function refreshLottery(){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// LEADERBOARD — built from dexStats.swaps (real CroSwap trades)
+// LEADERBOARD — built from dexStats.swaps (real NeonFi trades)
 // ═══════════════════════════════════════════════════════════════
 function setLbTab(tab,btn){
   lbTab=tab;
@@ -1040,7 +1119,7 @@ function refreshLeaderboard(){
 function renderLeaderboard(){
   const swaps=dexStats.swaps;
   if(swaps.length===0){
-    document.getElementById('lbList').innerHTML=`<div class="empty-lb"><div>🏆</div>No swaps yet on CroSwap.<br/>Make your first swap to appear here!</div>`;
+    document.getElementById('lbList').innerHTML=`<div class="empty-lb"><div>🏆</div>No swaps yet on NeonFi.<br/>Make your first swap to appear here!</div>`;
     return;
   }
 
@@ -1092,18 +1171,18 @@ async function loadLbAI(){
   const btn=document.getElementById('lbAIBtn');
   const body=document.getElementById('lbAIBody');
   btn.disabled=true;btn.textContent='…';
-  body.className='aib ld';body.textContent='Analysing CroSwap leaderboard…';
+  body.className='aib ld';body.textContent='Analysing NeonFi leaderboard…';
   const swaps=dexStats.swaps;
-  if(swaps.length===0){body.className='aib';body.textContent='No swaps on CroSwap yet. Make a swap first, then come back for leaderboard analysis!';btn.disabled=false;btn.textContent='Analyse';return;}
+  if(swaps.length===0){body.className='aib';body.textContent='No swaps on NeonFi yet. Make a swap first, then come back for leaderboard analysis!';btn.disabled=false;btn.textContent='Analyse';return;}
   const wallets={};
   swaps.forEach(s=>{if(!wallets[s.addr])wallets[s.addr]={addr:s.addr,swaps:0,vol:0};wallets[s.addr].swaps++;wallets[s.addr].vol+=s.amtInCRO;});
   const top3=Object.values(wallets).sort((a,b)=>b.swaps-a.swaps).slice(0,3);
-  const context=`CroSwap DEX leaderboard (${lbTab} ranking):
+  const context=`NeonFi DEX leaderboard (${lbTab} ranking):
 Total swaps: ${swaps.length}, unique traders: ${dexStats.traders.size}
 Top 3 traders:
 ${top3.map((r,i)=>`${i+1}. ${r.addr.slice(0,10)}…: ${r.swaps} swaps, ${r.vol.toFixed(1)} CRO volume`).join('\n')}`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`You are a DeFi analytics commentator for CroSwap DEX on Cronos. Give sharp 3-sentence commentary on this leaderboard data. Note any interesting patterns (bots vs humans, volume concentration, etc.) and give one tip for traders wanting to climb the ranks. Be direct, crypto-native, plain text only.\n\n${context}`}]})});
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`You are a DeFi analytics commentator for NeonFi DEX on Cronos. Give sharp 3-sentence commentary on this leaderboard data. Note any interesting patterns (bots vs humans, volume concentration, etc.) and give one tip for traders wanting to climb the ranks. Be direct, crypto-native, plain text only.\n\n${context}`}]})});
     const d=await res.json();
     body.className='aib';body.textContent=d.content?.[0]?.text||'Analysis unavailable.';
   }catch(e){body.className='aib';body.textContent='AI analysis unavailable.';}
