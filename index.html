@@ -548,6 +548,7 @@ const TOKENS = [
   {sym:'VVS',  name:'VVS Finance',    icon:'V',bg:'#1a3a1a',fg:'#4caf50',addr:'0x2D03bECE6747ADC00E1a131BBA1469C15fD11e03',dec:18,bal:0n,cg:'vvs-finance'},
   {sym:'MMF',  name:'MM Finance',     icon:'M',bg:'#2a1a1a',fg:'#ef4444',addr:'0x97749c9B61F878a880DfE312d2594AE07AEd7656',dec:18,bal:0n,cg:'mm-finance'},
   {sym:'TONIC',name:'Tectonic',       icon:'T',bg:'#1a2a3a',fg:'#06b6d4',addr:'0xDD73dEa10ABC2Bff99c60882EC5b2B81Bb1Dc5B2',dec:18,bal:0n,cg:'tectonic'},
+  {sym:'BMN',  name:'Black Moon',      icon:'B',bg:'#0d0d1a',fg:'#c084fc',addr:'0xCb49dd81da680ed11d10809B51d5D5D8e36F9B6D',dec:18,bal:0n,cg:''},
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -579,6 +580,7 @@ let lbTab = 'swaps';
 // ═══════════════════════════════════════════════════════════════
 const LC = {};
 async function fetchLogos() {
+  // 1. CoinGecko logos for known tokens
   const ids = [...new Set(TOKENS.map(t=>t.cg).filter(Boolean))];
   try {
     const r = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids.join(',')}&per_page=50&sparkline=false`,{signal:AbortSignal.timeout(8000)});
@@ -586,6 +588,20 @@ async function fetchLogos() {
     d.forEach(c => { if(c.image) LC[c.id]=c.image; TOKENS.forEach(t=>{if(t.cg===c.id)t.logo=c.image;}); });
     renderSel();
   } catch(e){}
+
+  // 2. Dexscreener logos for tokens with no CoinGecko ID (e.g. BMN)
+  const dexTokens = TOKENS.filter(t => !t.cg && t.addr !== 'NATIVE');
+  await Promise.allSettled(dexTokens.map(async tok => {
+    try {
+      const r = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tok.addr}`,{signal:AbortSignal.timeout(8000)});
+      const d = await r.json();
+      const pair = d?.pairs?.[0];
+      const isBase = pair?.baseToken?.address?.toLowerCase() === tok.addr.toLowerCase();
+      const logo = pair?.info?.imageUrl || (isBase ? pair?.baseToken?.logoURI : pair?.quoteToken?.logoURI) || null;
+      if(logo){ tok.logo = logo; }
+    } catch(e){}
+  }));
+  renderSel();
 }
 
 function mkLogo(tok,lg=false){
