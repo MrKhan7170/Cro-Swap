@@ -2261,15 +2261,16 @@ fetchLogos();
 refreshLottery();
 
 // Load swaps from Firebase + start live listener
-(function waitForFirebase(attempts){
-  if(attempts > 20) return;
+let _fbAttempts = 0;
+const _fbTimer = setInterval(() => {
+  _fbAttempts++;
+  if(_fbAttempts > 30){ clearInterval(_fbTimer); return; }
   if(typeof window.loadSwapsFromFirebase === 'function'){
+    clearInterval(_fbTimer);
     window.loadSwapsFromFirebase();
     window.listenSwaps();
-  } else {
-    setTimeout(() => waitForFirebase(attempts + 1), 300);
   }
-})(0);
+}, 500);
 
 if(window.ethereum){
   window.ethereum.request({method:'eth_accounts'}).then(async accs=>{
